@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/favicon.ico">
+    <title>event - plan with us</title>
+    <!-- <link rel="stylesheet" href="./styles/style.css" /> -->
+    <link rel="stylesheet" href="./styles/create.css" />
+    <link rel="stylesheet" href="./styles/layout.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section id="header">
+      <a href="/"
+        ><img src="./assets/planwithus.png" alt="logo plan with us"
+      /></a>
+      <div>
+        <ul id="navbar">
+          <li><a class="active" href="/">explore</a></li>
+          <% if (user && user.role === 'admin') { %>
+            <li><a href="/admin-dashboard">admin</a></li>
+          <% } %>  
+          <li><a href="/create">create</a></li>
+          <li><a href="/history">history</a></li>
+          <li><a href="/archive">archive</a></li>
+          <li class="profile-dropdown">
+            <a href="/profile" id="profileBtn">profile</a>
+            <div class="dropdown-content">
+              <a href="/profile">my profile</a>
+              <a href="/volunteer-management">manage volunteers</a>
+              <a href="/event-management">manage event</a>
+              <a href="/balance">balance</a>
+              <a href="/logout">logout</a>
+            </div>
+          </li>
+          <a href="#" id="close"><img src="./assets/x.png" alt="" /></a>
+        </ul>
+      </div>
+      <div id="mobile">
+        <i id="bar"><img src="./assets/list.png" alt="" /></i>
+      </div>
+    </section>
+
+    
+    <div id="header1">
+      <h2>create event</h2>
+      <p>create your event here!</p>
+    </div>
+    
+    
+
+    <form action="/create" method="POST" enctype="multipart/form-data">
+      <div id="form">
+        <div class="form-style">
+          <input type="text" name="eventname" placeholder="event name" required />
+          <input type="text" name="coordinatorname" placeholder="coordinator name" required />
+        </div>
+    
+        <div class="form-style">
+          <input type="email" name="email" placeholder="email" required />
+          <input type="number" name="targetmoney" placeholder="target money in rupiah" required />
+        </div>
+    
+        <div>
+          <div class="upload-file">
+            <label for="thumbnail" class="file-style">attach files</label>
+            <label for="thumbnail" class="label2">attach your thumbnail photo</label>
+            <input type="file" name="thumbnailphoto" id="thumbnail" accept="image/*" required />
+          </div>
+    
+          <div class="upload-file">
+            <label for="proposal" class="file-style">attach files</label>
+            <label for="proposal" class="label2">attach your proposal in pdf format</label>
+            <input type="file" name="file" id="proposal" accept="application/pdf" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="volunteer_needed">need volunteers?</label>
+          <div class="toggle-container">
+            <input type="checkbox" id="volunteer_needed" name="volunteer_needed" class="toggle-input">
+            <label for="volunteer_needed" class="toggle-label"></label>
+            <span class="toggle-text">no</span>
+            <span class="toggle-text">yes</span>
+          </div>
+        </div>
+        
+        <div id="volunteer-details" style="display: none;">
+          <div class="description-container">
+            <!-- <label for="volunteer_description">volunteer job description</label> -->
+            <textarea id="volunteer_description" name="volunteer_description" class="form-control" rows="3" placeholder="describe what volunteers will be doing"></textarea>
+          </div>
+          <div class="form-group-1">
+            <label for="max_volunteers">number of volunteers needed</label>
+            <input type="number" id="max_volunteers" name="max_volunteers" class="form-control" min="1" value="1">
+          </div>
+        </div>
+    
+        <div class="form-style-2">
+          <textarea name="additionalnotes" placeholder="additional notes"></textarea>
+        </div>
+    
+        <button type="submit" class="submit-button">submit</button>
+      </div>
+    </form>
+
+    <footer>
+        <a href="/"><img src="./assets/planwithus.png" alt="logo plan with us" /></a>
+        <a href="/create">create</a>
+        <a href="/history">history</a>
+        <a href="/archive">archive</a>
+    </footer>
+
+    <div id="footer-plus">
+        <a href="">privacy policy</a>
+        <p>plan with us</p>
+    </div>
+
+    <script src="./js/layout.js"></script>
+    <script>
+      
+    document.addEventListener('DOMContentLoaded', function() {
+      // Volunteer checkbox toggle
+      const volunteerCheckbox = document.getElementById('volunteer_needed');
+      const volunteerDetails = document.getElementById('volunteer-details');
+      
+      if (volunteerCheckbox && volunteerDetails) {
+        volunteerDetails.style.display = volunteerCheckbox.checked ? 'block' : 'none';
+        volunteerCheckbox.addEventListener('change', function() {
+          volunteerDetails.style.display = this.checked ? 'block' : 'none';
+        });
+      }
+    });
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+      fileInputs.forEach(input => {
+        input.addEventListener('change', function() {
+          const uploadDiv = this.closest('.upload-file');
+          const label = uploadDiv.querySelector('.label2');
+          if (this.files.length > 0) {
+            label.textContent = `Selected: ${this.files[0].name}`;
+            label.style.color = '#674636';
+            label.style.fontWeight = '600';
+            // uploadDiv.style.borderColor = '#4a90e2';
+            // uploadDiv.style.background = 'rgba(74, 144, 226, 0.1)';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

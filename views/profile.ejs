@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/favicon.ico">
+    <title>profile - plan with us</title>
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section id="header">
+      <a href="/"
+        ><img src="./assets/planwithus.png" alt="logo plan with us"
+      /></a>
+      <div>
+        <ul id="navbar">
+          <li><a href="/">explore</a></li>
+          <% if (role === 'admin') { %>
+            <li><a href="/admin-dashboard">admin</a></li>
+          <% } %>  
+          <li><a href="/create">create</a></li>
+          <li><a class="active" href="/history">history</a></li>
+          <li><a href="/archive">archive</a></li>
+          <li class="profile-dropdown">
+            <a href="#" id="profileBtn">profile</a>
+            <div class="dropdown-content">
+              <a href="/profile">my profile</a>
+              <a href="/volunteer-management">manage volunteers</a>
+              <a href="/event-management">manage event</a>
+              <a href="/balance">balance</a>
+              <a href="/logout">logout</a>
+            </div>
+          </li>
+          <a href="#" id="close"><img src="./assets/x.png" alt="" /></a>
+        </ul>
+      </div>
+      <div id="mobile">
+        <i id="bar"><img src="./assets/list.png" alt="" /></i>
+      </div>
+    </section>
+
+    <section class="profile-container">
+      <div class="profile-header">
+        <h1>my profile</h1>
+        <% if (message) { %>
+        <div class="alert <%= message.type %>"><%= message.text %></div>
+        <% } %>
+      </div>
+
+      <div id="profileView">
+        <div class="profile-info">
+          <div class="profile-section">
+            <div class="info-item">
+              <span class="label">name :</span>
+              <span class="value"><%= user.name %></span>
+            </div>
+            <div class="info-item">
+              <span class="label">email :</span>
+              <span class="value"><%= user.email %></span>
+            </div>
+            <div class="info-item">
+              <span class="label">since :</span>
+              <span class="value"><%= new Date(user.created_at).toLocaleDateString('en-GB') %></span>
+            </div>
+            <% if (user.bank_account) { %>
+            <div class="info-item">
+              <span class="label">bank account :</span>
+              <span class="value"><%= user.bank_account %></span>
+            </div>
+            <% } %>
+             <div class="user-statistics">
+                <div class="stat-item">
+                  <label>my events :</label>
+                  <p class="stat-number"><%= userStats.eventsCreated %></p>
+                </div>
+                <div class="stat-item">
+                  <label>total donated :</label>
+                  <p class="stat-number">IDR <%= userStats.totalDonated.toLocaleString() %></p>
+                </div>
+                <div class="stat-item">
+                  <label>volunteer activites :</label>
+                  <p class="stat-number"><%= userStats.volunteerActivities %></p>
+                </div>
+              </div>
+            </div>
+            <button class="edit-profile-btn" onclick="toggleEditForm()">edit</button>
+          </div>
+        </div>
+
+        <!-- <div class="user-statistics">
+          <div class="stat-item">
+            <label>my events :</label>
+            <p class="stat-number"><%= userStats.eventsCreated %></p>
+          </div>
+          <div class="stat-item">
+            <label>total donated :</label>
+            <p class="stat-number">IDR <%= userStats.totalDonated.toLocaleString() %></p>
+          </div>
+          <div class="stat-item">
+            <label>volunteer activites :</label>
+            <p class="stat-number"><%= userStats.volunteerActivities %></p>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="profile-edit-form" id="profileEditForm" style="display: none">
+        <h2>edit profile</h2>
+        <form action="/profile/update" method="POST">
+          <div class="form-group">
+            <label for="name">name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value="<%= user.name %>"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="<%= user.email %>"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="bank_account">bank account</label>
+            <input
+              type="text"
+              id="bank_account"
+              name="bank_account"
+              value="<%= user.bank_account || '' %>"
+              placeholder="releasing fund address"
+            />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="save-btn">save</button>
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="toggleEditForm()"
+            >
+              cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <a href="/"
+        ><img src="./assets/planwithus.png" alt="logo plan with us"
+      /></a>
+      <a href="/create">create</a>
+      <a href="/history">history</a>
+      <a href="/archive">archive</a>
+    </footer>
+
+    <div id="footer-plus">
+      <a href="">privacy policy</a>
+      <p>plan with us</p>
+    </div>
+
+    <script src="./js/script.js"></script>
+
+    <script>
+     document.addEventListener('DOMContentLoaded', function () {
+    
+    const bar = document.getElementById('bar');
+    const close = document.getElementById('close');
+    const navbar = document.getElementById('navbar');
+    const body = document.body;
+
+    
+    if (bar) {
+      bar.addEventListener('click', function (e) {
+        e.stopPropagation();
+        navbar.classList.add('active');
+        body.style.overflow = 'hidden';
+      });
+    }
+
+    
+    if (close) {
+      close.addEventListener('click', function (e) {
+        e.preventDefault();
+        navbar.classList.remove('active');
+        body.style.overflow = '';
+      });
+    }
+
+    
+    document.addEventListener('click', function (e) {
+      if (!navbar.contains(e.target) && e.target !== bar) {
+        navbar.classList.remove('active');
+        body.style.overflow = '';
+      }
+    });
+  });
+
+  
+  function toggleEditForm() {
+    const profileView = document.getElementById("profileView");
+    const form = document.getElementById("profileEditForm");
+
+    if (form.style.display === "none" || form.style.display === "") {
+      form.style.display = "block";
+      profileView.style.display = "none";
+    } else {
+      form.style.display = "none";
+      profileView.style.display = "block";
+    }
+  }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+.badge-modal-backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(163, 135, 125, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.badge-modal-content {
+  background: #f7eed3;
+  border: 1px solid #aab396;
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.badge-icon-wrapper {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.badge-level-ring {
+  width: 80px;
+  height: 80px;
+  background: #a3877d;
+  padding: 1rem;
+  border-radius: 50%;
+  border: 4px solid #f7eed3;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: bounce 1s infinite alternate;
+}
+
+.badge-level-ring img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
+.badge-modal-header {
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.badge-title {
+  color: #674636;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.badge-description {
+  background: rgba(170, 179, 150, 0.2);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  color: #674636;
+  text-align: center;
+}
+
+.badge-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 1rem 0;
+}
+
+.badge-meta-label {
+  font-size: 0.75rem;
+  color: rgba(103, 70, 54, 0.7);
+  text-align: center;
+}
+
+.badge-meta-value {
+  font-weight: 500;
+  color: #674636;
+  text-align: center;
+}
+
+.badge-meta-divider {
+  width: 1px;
+  height: 40px;
+  background: #aab396;
+}
+
+.badge-action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+}
+
+.badge-all-button {
+  background: #aab396;
+  color: #f7eed3;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.badge-view-button {
+  border: 1px solid #aab396;
+  color: #674636;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.badge-all-button:hover {
+  background: #868f72;
+}
+
+.badge-view-button:hover {
+  background: #cdc4aa;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}

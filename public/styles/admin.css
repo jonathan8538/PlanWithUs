@@ -1,0 +1,151 @@
+.card-archive {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  align-items: center;
+  margin: 20px 0;
+}
+.card-content {
+  display: flex;
+  flex-direction: row;
+  height: 450px;
+  width: 70vw;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.image-container {
+  width: 50%;
+  height: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.money-style {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f7eed3;
+}
+
+.money-style p {
+  margin: 8px 0;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.money-style form {
+  /* margin-top: 15px; */
+}
+
+.button-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  /* justify-content: center; */
+  height: 50px;
+  width: 400px;
+  margin-top: 20px;
+}
+
+.view-proof-button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+  background-color: #c49b7a;
+  border: 0;
+  padding: 12px 23px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  /* height: 100%; */
+}
+
+.view-proof-button:hover {
+  background-color: #a58266;
+}
+
+.button-section form button {
+  background-color: #aab396;
+  border: 0;
+  padding: 12px 23px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: normal;
+  text-transform: lowercase;
+}
+
+.button-section form button:hover {
+  background-color: #9ba587;
+}
+
+.reject-btn {
+  background-color: #DA6C6C;
+  border: 0;
+  padding: 12px 23px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: normal;
+  text-transform: lowercase;
+}
+
+.reject-btn:hover {
+  background-color: #b45050;
+}
+
+
+@media (max-width: 768px) {
+  .card-content {
+    flex-direction: column;
+    height: auto;
+    width: 90vw;
+  }
+  .image-container {
+    width: 100%;
+    height: 300px;
+  }
+  .money-style {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+}
+
+.empty-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.empty-message {
+  color: #856404;
+  font-style: italic;
+  font-size: 1.5rem;
+  padding: 20px 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+  text-align: center;
+  max-width: 80%;
+}
