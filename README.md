@@ -24,7 +24,7 @@ Plan With Us aims to foster grassroots environmental action by connecting indivi
 Step-by-step guide to get the project running locally.
 
 ```bash
-git clone https://github.com/juanariviano/PlanWithUs.git
+git clone https://github.com/jonathan8538/PlanWithUs.git
 
 cd PlanWithUs
 
